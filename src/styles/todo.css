@@ -1,0 +1,86 @@
+/*
+  TODO MICROFRONTEND styles. Plain CSS: write it as if the app had the page
+  to itself.
+
+  vite-addons/css-scoping.ts isolates it at build time:
+    - wraps every rule in @scope (.<package name>) { … }
+    - turns :root into :scope, i.e. this app's root element, not <html>
+
+  So short class names like .todo can't style the rest of the page, and the
+  tokens on :root don't leak out.
+
+  Classes only: element selectors (button, h1, .todo label…) are forbidden
+  by stylelint (selector-max-type, see stylelint.config.js).
+*/
+:root {
+  --bg: #ffffff;
+  --text: #18181b;
+  --muted: #71717a;
+  --border: #e4e4e7;
+  --accent: #2563eb;
+
+  max-width: 28rem;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18181b;
+    --text: #fafafa;
+    --muted: #a1a1aa;
+    --border: #27272a;
+    --accent: #3b82f6;
+  }
+}
+
+/* classes only: element selectors (button, h1…) are forbidden by stylelint */
+.title { margin: 0 0 1rem; font-size: 1.5rem; }
+.button {
+  font: inherit;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.clear { font-size: 0.85rem; padding: 0.3rem 0.6rem; }
+
+.new-todo { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.new-todo-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.add { background: var(--accent); border-color: var(--accent); color: white; }
+
+.todos { list-style: none; margin: 0; padding: 0; }
+.todo {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.todo-label { flex: 1; display: flex; align-items: center; gap: 0.6rem; cursor: pointer; }
+.done .todo-text { text-decoration: line-through; color: var(--muted); }
+.id { color: var(--muted); font-family: ui-monospace, monospace; font-size: 0.75rem; margin-right: 0.5rem; }
+.delete { border: none; color: var(--muted); font-size: 1.2rem; padding: 0 0.5rem; }
+.delete:hover { color: #dc2626; }
+
+.empty { color: var(--muted); text-align: center; }

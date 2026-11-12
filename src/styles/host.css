@@ -1,0 +1,12 @@
+/* HOST PAGE styles: owned by the "shell", not by the todo microfrontend.
+   Keep this tiny. Microfrontends must not depend on it. */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+  background: #f4f4f5;
+}
+@media (prefers-color-scheme: dark) {
+  body { background: #09090b; }
+}
